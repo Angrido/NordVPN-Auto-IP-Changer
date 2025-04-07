@@ -16,7 +16,6 @@ A simple and interactive bash script that automatically changes your NordVPN IP 
 
 ## ⚙️ Requirements
 
-- 🐧 Debian-based system (or any Linux distro with bash)
 - 🧭 [NordVPN](https://nordvpn.com/)
 - 🛜 Active NordVPN subscription & logged in (`nordvpn login -token YOURTOKEN`)
 
