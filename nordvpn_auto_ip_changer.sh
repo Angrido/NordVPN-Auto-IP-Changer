@@ -1,24 +1,29 @@
 #!/bin/bash
 
-# CONFIGURATION
-COUNTRY="it"         # Change to your preferred country code (e.g. us, ch, fr...)
-INTERVAL=10          # Minutes between each IP change
+# Interactive configuration
+read -p "🌍 Enter the country code (e.g., it, us, de): " COUNTRY
+read -p "⏳ Enter interval in minutes between IP changes: " INTERVAL
 
-echo "🌀 Starting automatic IP changer with NordVPN..."
-echo "🌍 Country: $COUNTRY | 🔁 Every $INTERVAL minutes"
+echo ""
+echo "🌀 Starting NordVPN Auto IP Changer..."
+echo "🌍 Country: $COUNTRY"
+echo "🔁 Interval: $INTERVAL minutes"
+echo ""
 
 while true; do
-    echo "🔌 Disconnecting..."
+    echo "🔌 Disconnecting from current VPN session..."
     nordvpn disconnect
     sleep 3
 
-    echo "🔗 Connecting to a new server in $COUNTRY..."
-    nordvpn connect $COUNTRY
+    echo "🔗 Connecting to a new VPN server in $COUNTRY..."
+    nordvpn connect "$COUNTRY"
     sleep 5
 
     NEW_IP=$(curl -s ifconfig.me)
     echo "✅ New IP: $NEW_IP"
+    echo ""
 
-    echo "⏳ Waiting $INTERVAL minutes before the next change..."
+    echo "⏳ Waiting $INTERVAL minutes before next change..."
     sleep $(($INTERVAL * 60))
+    echo ""
 done
